@@ -1,0 +1,280 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+const int MAX_STUDENTS = 50;
+
+// Structure to store the student
+struct Student {
+    string fname;
+    string lname;
+    int roll;
+    float cgpa;
+    int cid[5];
+};
+
+// Array to store the student records
+Student st[MAX_STUDENTS];
+
+// Variable to keep track of number of students
+int numStudents = 0;
+
+// Function to add a new student record
+void add_student() {
+    if (numStudents == MAX_STUDENTS) {
+        cout << "Maximum number of students reached." << endl;
+        return;
+    }
+
+    cout << "Add Student Details" << endl;
+    cout << "-------------------" << endl;
+    cout << "Enter the First Name: ";
+    cin >> st[numStudents].fname;
+    cout << "Enter the Last Name: ";
+    cin >> st[numStudents].lname;
+    cout << "Enter the Roll Number: ";
+    cin >> st[numStudents].roll;
+    cout << "Enter the CGPA: ";
+    cin >> st[numStudents].cgpa;
+    cout << "Enter the Course IDs (up to 5): ";
+    for (int i = 0; i < 5; i++) {
+        cin >> st[numStudents].cid[i];
+    }
+
+    numStudents++;
+    cout << "Student record added successfully." << endl;
+}
+
+// Function to find a student record by roll number
+void find_student_by_roll() {
+    int roll;
+    cout << "Enter the Roll Number of the student: ";
+    cin >> roll;
+
+    bool found = false;
+
+    for (int i = 0; i < numStudents; i++) {
+        if (roll == st[i].roll) {
+            found = true;
+            cout << "Student Details:" << endl;
+            cout << "----------------" << endl;
+            cout << "First Name: " << st[i].fname << endl;
+            cout << "Last Name: " << st[i].lname << endl;
+            cout << "Roll Number: " << st[i].roll << endl;
+            cout << "CGPA: " << st[i].cgpa << endl;
+            cout << "Course IDs: ";
+            for (int j = 0; j < 5; j++) {
+                cout << st[i].cid[j] << " ";
+            }
+            cout << endl;
+            break;
+        }
+    }
+
+    if (!found) {
+        cout << "Student not found." << endl;
+    }
+}
+
+// Function to find student records by first name
+void find_student_by_fname() {
+    string fname;
+    cout << "Enter the First Name of the student: ";
+    cin >> fname;
+
+    bool found = false;
+
+    for (int i = 0; i < numStudents; i++) {
+        if (fname == st[i].fname) {
+            found = true;
+            cout << "Student Details:" << endl;
+            cout << "----------------" << endl;
+            cout << "First Name: " << st[i].fname << endl;
+            cout << "Last Name: " << st[i].lname << endl;
+            cout << "Roll Number: " << st[i].roll << endl;
+            cout << "CGPA: " << st[i].cgpa << endl;
+            cout << "Course IDs: ";
+            for (int j = 0; j < 5; j++) {
+                cout << st[i].cid[j] << " ";
+            }
+            cout << endl;
+        }
+    }
+
+    if (!found) {
+        cout << "Student not found." << endl;
+    }
+}
+
+// Function to find student records by course ID
+void find_students_by_course() {
+    int cid;
+    cout << "Enter the Course ID: ";
+    cin >> cid;
+
+    bool found = false;
+
+    for (int i = 0; i < numStudents; i++) {
+        for (int j = 0; j < 5; j++) {
+            if (cid == st[i].cid[j]) {
+                found = true;
+                cout << "Student Details:" << endl;
+                cout << "----------------" << endl;
+                cout << "First Name: " << st[i].fname << endl;
+                cout << "Last Name: " << st[i].lname << endl;
+                cout << "Roll Number: " << st[i].roll << endl;
+                cout << "CGPA: " << st[i].cgpa << endl;
+                break;
+            }
+        }
+    }
+
+    if (!found) {
+        cout << "No students enrolled in the course." << endl;
+    }
+}
+
+// Function to print the total number of students
+void total_students() {
+    cout << "Total Number of Students: " << numStudents << endl;
+    cout << "Remaining Slots: " << MAX_STUDENTS - numStudents << endl;
+}
+
+// Function to delete a student record by roll number
+void delete_student() {
+    int roll;
+    cout << "Enter the Roll Number of the student to delete: ";
+    cin >> roll;
+
+    bool found = false;
+
+    for (int i = 0; i < numStudents; i++) {
+        if (roll == st[i].roll) {
+            found = true;
+            for (int j = i; j < numStudents - 1; j++) {
+                st[j] = st[j + 1];
+            }
+            numStudents--;
+            cout << "Student record deleted successfully." << endl;
+            break;
+        }
+    }
+
+    if (!found) {
+        cout << "Student not found." << endl;
+    }
+}
+
+// Function to update a student's data by roll number
+void update_student() {
+    int roll;
+    cout << "Enter the Roll Number of the student to update: ";
+    cin >> roll;
+
+    bool found = false;
+
+    for (int i = 0; i < numStudents; i++) {
+        if (roll == st[i].roll) {
+            found = true;
+            cout << "Select the field to update:" << endl;
+            cout << "1. First Name" << endl;
+            cout << "2. Last Name" << endl;
+            cout << "3. Roll Number" << endl;
+            cout << "4. CGPA" << endl;
+            cout << "5. Course IDs" << endl;
+            int choice;
+            cin >> choice;
+
+            switch (choice) {
+                case 1:
+                    cout << "Enter the new First Name: ";
+                    cin >> st[i].fname;
+                    break;
+                case 2:
+                    cout << "Enter the new Last Name: ";
+                    cin >> st[i].lname;
+                    break;
+                case 3:
+                    cout << "Enter the new Roll Number: ";
+                    cin >> st[i].roll;
+                    break;
+                case 4:
+                    cout << "Enter the new CGPA: ";
+                    cin >> st[i].cgpa;
+                    break;
+                case 5:
+                    cout << "Enter the new Course IDs (up to 5): ";
+                    for (int j = 0; j < 5; j++) {
+                        cin >> st[i].cid[j];
+                    }
+                    break;
+                default:
+                    cout << "Invalid choice." << endl;
+            }
+
+            cout << "Student record updated successfully." << endl;
+            break;
+        }
+    }
+
+    if (!found) {
+        cout << "Student not found." << endl;
+    }
+}
+
+// Function to display the menu options
+void display_menu() {
+    cout << endl;
+    cout << "Student Management System" << endl;
+    cout << "-------------------------" << endl;
+    cout << "1. Add Student" << endl;
+    cout << "2. Find Student by Roll Number" << endl;
+    cout << "3. Find Student by First Name" << endl;
+    cout << "4. Find Students by Course ID" << endl;
+    cout << "5. Total Number of Students" << endl;
+    cout << "6. Delete Student" << endl;
+    cout << "7. Update Student" << endl;
+    cout << "8. Exit" << endl;
+}
+
+int main() {
+    int choice;
+
+    do {
+        display_menu();
+        cout << "Enter your choice: ";
+        cin >> choice;
+
+        switch (choice) {
+            case 1:
+                add_student();
+                break;
+            case 2:
+                find_student_by_roll();
+                break;
+            case 3:
+                find_student_by_fname();
+                break;
+            case 4:
+                find_students_by_course();
+                break;
+            case 5:
+                total_students();
+                break;
+            case 6:
+                delete_student();
+                break;
+            case 7:
+                update_student();
+                break;
+            case 8:
+                cout << "Exiting..." << endl;
+                break;
+            default:
+                cout << "Invalid choice." << endl;
+        }
+
+    } while (choice != 8);
+
+    return 0;
+}
