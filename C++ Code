@@ -4,7 +4,6 @@ using namespace std;
 
 const int MAX_STUDENTS = 50;
 
-// Structure to store the student
 struct Student {
     string fname;
     string lname;
@@ -13,13 +12,13 @@ struct Student {
     int cid[5];
 };
 
-// Array to store the student records
+
 Student st[MAX_STUDENTS];
 
-// Variable to keep track of number of students
+
 int numStudents = 0;
 
-// Function to add a new student record
+
 void add_student() {
     if (numStudents == MAX_STUDENTS) {
         cout << "Maximum number of students reached." << endl;
@@ -45,7 +44,6 @@ void add_student() {
     cout << "Student record added successfully." << endl;
 }
 
-// Function to find a student record by roll number
 void find_student_by_roll() {
     int roll;
     cout << "Enter the Roll Number of the student: ";
@@ -76,7 +74,7 @@ void find_student_by_roll() {
     }
 }
 
-// Function to find student records by first name
+
 void find_student_by_fname() {
     string fname;
     cout << "Enter the First Name of the student: ";
@@ -106,7 +104,6 @@ void find_student_by_fname() {
     }
 }
 
-// Function to find student records by course ID
 void find_students_by_course() {
     int cid;
     cout << "Enter the Course ID: ";
@@ -134,13 +131,13 @@ void find_students_by_course() {
     }
 }
 
-// Function to print the total number of students
+
 void total_students() {
     cout << "Total Number of Students: " << numStudents << endl;
     cout << "Remaining Slots: " << MAX_STUDENTS - numStudents << endl;
 }
 
-// Function to delete a student record by roll number
+
 void delete_student() {
     int roll;
     cout << "Enter the Roll Number of the student to delete: ";
@@ -165,7 +162,7 @@ void delete_student() {
     }
 }
 
-// Function to update a student's data by roll number
+
 void update_student() {
     int roll;
     cout << "Enter the Roll Number of the student to update: ";
@@ -222,7 +219,7 @@ void update_student() {
     }
 }
 
-// Function to display the menu options
+
 void display_menu() {
     cout << endl;
     cout << "Student Management System" << endl;
